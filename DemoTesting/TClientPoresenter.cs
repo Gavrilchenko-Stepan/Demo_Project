@@ -43,7 +43,7 @@ namespace DemoTesting
             testClients.Add(c3);
 
             var mockModel = new Mock<IClientsModel>(); /// фейковая модель
-            var mockViews = new List<IClientView>(); /// фейковые представления
+            var mockViews = new List<Mock<IClientView>>(); /// фейковые представления
 
             int countClients = testClients.Count;
             mockModel
@@ -59,11 +59,27 @@ namespace DemoTesting
                 Client client = testClients[clientId];
                 Mock<IClientView> view = new Mock<IClientView>();
 
-                ///Д.З. сделать проверку Verify
+                ///Д.З. сделать проверку Verify - сделано
                 view.Setup(v => v.ShowClientInfo(client));
-                mockViews.Add(view.Object);
+                mockViews.Add(view);
             }
-            var clientPresenter = new ClientPresenter(mockModel.Object, mockViews);
+
+            var viewObjects = new List<IClientView>();
+            foreach (var mockView in mockViews)
+            {
+                viewObjects.Add(mockView.Object);
+            }
+            var clientPresenter = new ClientPresenter(mockModel.Object, viewObjects);
+
+            mockModel.Verify(m => m.ReadAllClients(), Times.Once,
+                "Метод ReadAllClients() должен быть вызван один раз");
+
+            ///Проверяем, что для каждого клиента был вызван ShowClientInfo
+            for (int i = 0; i < testClients.Count; i++)
+            {
+                mockViews[i].Verify(v => v.ShowClientInfo(testClients[i]), Times.Once,
+                    $"Метод ShowClientInfo должен быть вызван для клиента {testClients[i].Name}");
+            }
         }
     }
 }
