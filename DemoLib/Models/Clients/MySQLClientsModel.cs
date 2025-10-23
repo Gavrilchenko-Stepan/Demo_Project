@@ -10,7 +10,7 @@ namespace DemoLib.Models.Clients
 {
     public class MySQLClientsModel : IClientsModel
     {
-        private const string connStr = "server=localhost;user=root;database=clients_db;password=1234567;port=3307;";
+        private const string connStr = "server=localhost;user=root;database=clients_db;password=vertrigo;port=3306;";
         public int GetClientsCount()
         {
             try

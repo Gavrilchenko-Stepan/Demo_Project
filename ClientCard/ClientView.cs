@@ -8,7 +8,7 @@ namespace ClientCard
 {
     public partial class ClientView: UserControl, IClientView
     {
-        private Color defaultColor = Color.FromArgb(255, 192, 128);
+        private Color defaultColor = Color.FromArgb(240, 245, 255);
         private Color enteringColor = Color.FromName("SlateBlue");
         private Client client_;
 
@@ -33,7 +33,7 @@ namespace ClientCard
             DescriptionLabel.Text = client.Description;
             PhoneLabel.Text = client.Phone;
             MailLabel.Text = client.Mail;
-            AvatarBox.Load(client.ImagePath);
+            ///AvatarBox.Load(client.ImagePath);
         }
 
         public Client GetClientInfo()

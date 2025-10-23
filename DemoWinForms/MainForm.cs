@@ -21,7 +21,7 @@ namespace DemoProject
 
             MySQLClientsModel model = new MySQLClientsModel();
 
-            /// Д.З Сделать нормальный вид карточек
+            /// Д.З Сделать нормальный вид карточек - сделано
             List<IClientView> cards = new List<IClientView>();
 
             int countClients = 0;
