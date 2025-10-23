@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.ManagementPanel = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.AddtoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.DeletetoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.OrdersTable = new System.Windows.Forms.DataGridView();
             this.ManagementPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersTable)).BeginInit();
@@ -40,41 +40,44 @@
             // 
             this.ManagementPanel.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ManagementPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2});
+            this.AddtoolStripButton,
+            this.DeletetoolStripButton});
             this.ManagementPanel.Location = new System.Drawing.Point(0, 0);
             this.ManagementPanel.Name = "ManagementPanel";
             this.ManagementPanel.Size = new System.Drawing.Size(800, 35);
             this.ManagementPanel.TabIndex = 0;
             this.ManagementPanel.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // AddtoolStripButton
             // 
-            this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::DemoProject.Properties.Resources.AddIcon;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(32, 32);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.ToolTipText = "Позволит добавить новый заказ";
+            this.AddtoolStripButton.AutoSize = false;
+            this.AddtoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddtoolStripButton.Image = global::DemoProject.Properties.Resources.AddIcon;
+            this.AddtoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddtoolStripButton.Name = "AddtoolStripButton";
+            this.AddtoolStripButton.Size = new System.Drawing.Size(32, 32);
+            this.AddtoolStripButton.Text = "toolStripButton1";
+            this.AddtoolStripButton.ToolTipText = "Позволит добавить новый заказ";
             // 
-            // toolStripButton2
+            // DeletetoolStripButton
             // 
-            this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::DemoProject.Properties.Resources.RemoveIcon;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(32, 32);
-            this.toolStripButton2.Text = "toolStripButton2";
+            this.DeletetoolStripButton.AutoSize = false;
+            this.DeletetoolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DeletetoolStripButton.Image = global::DemoProject.Properties.Resources.RemoveIcon;
+            this.DeletetoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeletetoolStripButton.Name = "DeletetoolStripButton";
+            this.DeletetoolStripButton.Size = new System.Drawing.Size(32, 32);
+            this.DeletetoolStripButton.Text = "toolStripButton2";
             // 
             // OrdersTable
             // 
+            this.OrdersTable.AllowUserToAddRows = false;
             this.OrdersTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OrdersTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OrdersTable.Location = new System.Drawing.Point(0, 35);
             this.OrdersTable.Name = "OrdersTable";
+            this.OrdersTable.ReadOnly = true;
+            this.OrdersTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.OrdersTable.Size = new System.Drawing.Size(800, 415);
             this.OrdersTable.TabIndex = 1;
             // 
@@ -97,8 +100,8 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip ManagementPanel;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton AddtoolStripButton;
+        private System.Windows.Forms.ToolStripButton DeletetoolStripButton;
         private System.Windows.Forms.DataGridView OrdersTable;
     }
 }

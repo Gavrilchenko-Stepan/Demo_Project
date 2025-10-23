@@ -13,6 +13,8 @@ namespace DemoProject
 {
     public partial class ClientOrdersForm: Form
     {
+        private Order currentOrder_;
+        private BindingList<OrderRecord> ordersBindingList_;
         public ClientOrdersForm()
         {
             InitializeComponent();
@@ -23,6 +25,7 @@ namespace DemoProject
             /// Д.З. Сделать масштабирование колонок таблицы по размеру окна
             /// Добавить строку Итого
             /// По цене: средняя цена, по стоимости - общая сумма, остальные - прочерки
+            currentOrder_ = order;
             OrdersTable.DataSource = null;
             OrdersTable.DataSource = order.GetRecords();
         }
