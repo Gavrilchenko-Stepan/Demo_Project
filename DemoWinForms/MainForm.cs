@@ -105,5 +105,61 @@ namespace DemoProject
                 Text = this.Text + " - " + currentUser_.Login;
             }
         }
+
+        private void естьЗаказыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplyOrderFilter(sender);
+        }
+
+        private void нетЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplyOrderFilter(sender);
+        }
+
+        private void ApplyOrderFilter(object sender)
+        {
+            // Получаем текущее состояние галочек
+            bool hasOrders = естьЗаказыToolStripMenuItem.Checked;
+            bool noOrders = нетЗаказовToolStripMenuItem.Checked;
+
+            // Защита от одновременного выбора обоих фильтров
+            // Если пользователь выбрал оба варианта, снимаем предыдущую галочку
+            if (hasOrders && noOrders)
+            {
+                var clickedItem = sender as ToolStripMenuItem;
+                if (clickedItem == естьЗаказыToolStripMenuItem)
+                {
+                    // Если нажали "Есть заказы" - снимаем "Нет заказов"
+                    нетЗаказовToolStripMenuItem.Checked = false;
+                    noOrders = false;
+                }
+                else
+                {
+                    // Если нажали "Нет заказов" - снимаем "Есть заказы"
+                    естьЗаказыToolStripMenuItem.Checked = false;
+                    hasOrders = false;
+                }
+            }
+
+            // Обновляем текст на кнопке фильтра для отображения текущего состояния
+            if (hasOrders)
+                toolStripFilterButton.Text = "Есть заказы ✓";
+            else if (noOrders)
+                toolStripFilterButton.Text = "Нет заказов ✓";
+            else
+                toolStripFilterButton.Text = "Фильтр по заказам";
+
+            // Применяем или сбрасываем фильтр в зависимости от состояния галочек
+            if (hasOrders || noOrders)
+            {
+                // Если хотя бы одна галочка установлена - применяем фильтр
+                presenter_?.ApplyOrdersFilter(hasOrders, noOrders);
+            }
+            else
+            {
+                // Если все галочки сняты - сбрасываем фильтр (показываем всех клиентов)
+                presenter_?.ResetFilter();
+            }
+        }
     }
 }

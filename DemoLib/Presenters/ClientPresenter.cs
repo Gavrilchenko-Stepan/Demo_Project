@@ -8,6 +8,8 @@ namespace DemoLib.Presenters
     {
         private readonly IClientsModel model_;
         private readonly List<IClientView> views_ = new List<IClientView>();
+        private bool filterHasOrders_ = false;
+        private bool filterNoOrders_ = false;
         public ClientPresenter(IClientsModel model, List<IClientView> views)
         {
             model_ = model;
@@ -45,7 +47,64 @@ namespace DemoLib.Presenters
             }
         }
 
-        /// Д.З. Реализация фильтрации по какому-либо полю клиента
+        /// Д.З. Реализация фильтрации по какому-либо полю клиента - сделано
+        /// Применение фильтра по заказам
+        public void ApplyOrdersFilter(bool hasOrders, bool noOrders)
+        {
+            filterHasOrders_ = hasOrders;
+            filterNoOrders_ = noOrders;
+
+            // Если обе галочки сняты - показываем всех
+            if (!hasOrders && !noOrders)
+            {
+                ResetFilter();
+                return;
+            }
+
+            ApplyFilterToViews(client =>
+            {
+                int orderCount = client.order.GetRecords().Count;
+                bool hasOrdersCondition = hasOrders && orderCount > 0;
+                bool noOrdersCondition = noOrders && orderCount == 0;
+
+                return hasOrdersCondition || noOrdersCondition;
+            });
+        }
+
+        /// Сброс фильтра - показываем всех клиентов
+        public void ResetFilter()
+        {
+            filterHasOrders_ = false;
+            filterNoOrders_ = false;
+
+            foreach (IClientView view in views_)
+            {
+                view.ShowView();
+            }
+        }
+
+        /// Универсальный метод применения фильтра к представлениям
+        private void ApplyFilterToViews(System.Func<Client, bool> filterCondition)
+        {
+            foreach (IClientView view in views_)
+            {
+                Client client = view.GetClientInfo();
+                if (filterCondition(client))
+                {
+                    view.ShowView();
+                }
+                else
+                {
+                    view.HideView();
+                }
+            }
+        }
+
+        public (bool hasOrders, bool noOrders) GetCurrentFilter()
+        {
+            return (filterHasOrders_, filterNoOrders_);
+        }
         /// Задание на 5+++++++. Сортировка  по числу заказов!!!
+
     }
 }

@@ -34,6 +34,10 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.SearchByNameLabel = new System.Windows.Forms.ToolStripLabel();
             this.SearchByClientNameTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripFilterButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.естьЗаказыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нетЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +55,9 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SearchByNameLabel,
-            this.SearchByClientNameTextBox});
+            this.SearchByClientNameTextBox,
+            this.toolStripSeparator1,
+            this.toolStripFilterButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -71,6 +77,39 @@
             this.SearchByClientNameTextBox.Name = "SearchByClientNameTextBox";
             this.SearchByClientNameTextBox.Size = new System.Drawing.Size(100, 25);
             this.SearchByClientNameTextBox.TextChanged += new System.EventHandler(this.SearchByClientNameTextBox_TextChanged);
+            // 
+            // toolStripFilterButton
+            // 
+            this.toolStripFilterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripFilterButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.естьЗаказыToolStripMenuItem,
+            this.нетЗаказовToolStripMenuItem});
+            this.toolStripFilterButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripFilterButton.Image")));
+            this.toolStripFilterButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripFilterButton.Name = "toolStripFilterButton";
+            this.toolStripFilterButton.Size = new System.Drawing.Size(124, 22);
+            this.toolStripFilterButton.Text = "Фильтр по заказам";
+            // 
+            // естьЗаказыToolStripMenuItem
+            // 
+            this.естьЗаказыToolStripMenuItem.CheckOnClick = true;
+            this.естьЗаказыToolStripMenuItem.Name = "естьЗаказыToolStripMenuItem";
+            this.естьЗаказыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.естьЗаказыToolStripMenuItem.Text = "Есть заказы";
+            this.естьЗаказыToolStripMenuItem.Click += new System.EventHandler(this.естьЗаказыToolStripMenuItem_Click);
+            // 
+            // нетЗаказовToolStripMenuItem
+            // 
+            this.нетЗаказовToolStripMenuItem.CheckOnClick = true;
+            this.нетЗаказовToolStripMenuItem.Name = "нетЗаказовToolStripMenuItem";
+            this.нетЗаказовToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.нетЗаказовToolStripMenuItem.Text = "Нет заказов";
+            this.нетЗаказовToolStripMenuItem.Click += new System.EventHandler(this.нетЗаказовToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -98,6 +137,10 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel SearchByNameLabel;
         private System.Windows.Forms.ToolStripTextBox SearchByClientNameTextBox;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripFilterButton;
+        private System.Windows.Forms.ToolStripMenuItem естьЗаказыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem нетЗаказовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
