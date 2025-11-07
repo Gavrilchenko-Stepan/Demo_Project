@@ -48,6 +48,16 @@ namespace DemoLib.Presenters
             RefreshClients();
         }
 
+        public bool RemoveClient(int clientId)
+        {
+            bool result = model_.RemoveClient(clientId);
+            if (result)
+            {
+                RefreshClients();
+            }
+            return result;
+        }
+
         public void SearchClientsByPartialName(string searchText)
         {
             foreach (IClientView view in views_)
