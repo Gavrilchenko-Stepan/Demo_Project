@@ -68,7 +68,12 @@ namespace DemoLib.Models
 
         public bool RemoveClient(int clientId)
         {
-            throw new System.NotImplementedException();
+            var clientToRemove = allClients_.FirstOrDefault(c => c.ID == clientId);
+            if (clientToRemove != null)
+            {
+                return allClients_.Remove(clientToRemove);
+            }
+            return false;
         }
 
         public void UpdateClient(Client client)
