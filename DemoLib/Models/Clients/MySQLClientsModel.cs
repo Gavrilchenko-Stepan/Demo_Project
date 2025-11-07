@@ -11,6 +11,34 @@ namespace DemoLib.Models.Clients
     public class MySQLClientsModel : IClientsModel
     {
         private const string connStr = "server=localhost;user=root;database=clients_db;password=vertrigo;port=3306;";
+
+        public void AddClient(Client client)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connStr))
+                {
+                    connection.Open();
+
+                    string sql = @"INSERT INTO clientsinfo (clientName, phone, mail, description, imagePath) 
+                                  VALUES (@name, @phone, @mail, @description, @imagePath)";
+
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@name", client.Name);
+                    command.Parameters.AddWithValue("@phone", client.Phone);
+                    command.Parameters.AddWithValue("@mail", client.Mail);
+                    command.Parameters.AddWithValue("@description", client.Description);
+                    command.Parameters.AddWithValue("@imagePath", client.ImagePath);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public int GetClientsCount()
         {
             try
@@ -87,6 +115,16 @@ namespace DemoLib.Models.Clients
             {
                 throw ex;
             }
+        }
+
+        public bool RemoveClient(int clientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateClient(Client client)
+        {
+            throw new NotImplementedException();
         }
     }
 }
