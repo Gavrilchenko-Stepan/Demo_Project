@@ -14,6 +14,7 @@ namespace DemoLib.Presenters
         {
             model_ = model;
             views_ = views;
+            RefreshClients();
 
             List<Client> allClients = model_.ReadAllClients();
 
@@ -39,6 +40,12 @@ namespace DemoLib.Presenters
                     views_[i].ShowClientInfo(client);
                 }
             }
+        }
+
+        public void AddClient(Client client)
+        {
+            model_.AddClient(client);
+            RefreshClients();
         }
 
         public void SearchClientsByPartialName(string searchText)
