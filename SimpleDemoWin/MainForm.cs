@@ -118,7 +118,32 @@ namespace SimpleDemoWin
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
+            var selectedClient = ClientsListBox.SelectedItem as Client;
+            if (selectedClient == null)
+            {
+                MessageBox.Show("Выберите клиента для удаления", "Информация",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            var result = MessageBox.Show($"Вы уверены, что хотите удалить клиента '{selectedClient.Name}'?",
+                "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                bool success = presenter_.RemoveClient(selectedClient.ID);
+                if (success)
+                {
+                    RefreshClientList();
+                    MessageBox.Show("Клиент успешно удален", "Успех",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка при удалении клиента", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void EditButton_Click(object sender, EventArgs e)
