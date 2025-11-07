@@ -148,7 +148,22 @@ namespace SimpleDemoWin
 
         private void EditButton_Click(object sender, EventArgs e)
         {
+            var selectedClient = ClientsListBox.SelectedItem as Client;
+            if (selectedClient == null)
+            {
+                MessageBox.Show("Выберите клиента для редактирования", "Информация",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            using (var form = new AddEditClientForm(selectedClient))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    presenter_.UpdateClient(form.Client);
+                    RefreshClientList();
+                }
+            }
         }
 
         private void RefreshClientList()
