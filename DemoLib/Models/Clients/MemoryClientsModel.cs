@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DemoLib.Models
 {
@@ -48,6 +49,31 @@ namespace DemoLib.Models
         public int GetClientsCount()
         {
             return allClients_.Count;
+        }
+
+        public void AddClient(Client client)
+        {
+            int nextId = allClients_.Count > 0 ? allClients_.Max(c => c.ID) + 1 : 1;
+
+            var newClient = new Client(nextId)
+            {
+                Name = client.Name,
+                Description = client.Description,
+                Phone = client.Phone,
+                Mail = client.Mail,
+                ImagePath = client.ImagePath
+            };
+            allClients_.Add(newClient);
+        }
+
+        public bool RemoveClient(int clientId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void UpdateClient(Client client)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
