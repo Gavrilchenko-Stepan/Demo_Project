@@ -9,5 +9,6 @@ namespace DemoLib.Models
         int GetClientsCount();
         void AddClient(Client client);
         bool RemoveClient(int clientId);
+        void UpdateClient(Client client);
     }
 }
