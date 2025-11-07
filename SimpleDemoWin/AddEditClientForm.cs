@@ -54,7 +54,20 @@ namespace SimpleDemoWin
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text))
+            {
+                MessageBox.Show("Введите имя клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            client_.Name = NameTextBox.Text;
+            client_.Phone = PhoneTextBox.Text;
+            client_.Mail = MailTextBox.Text;
+            client_.Description = DescriptionTextBox.Text;
+            client_.ImagePath = ImagePathTextBox.Text;
+
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
