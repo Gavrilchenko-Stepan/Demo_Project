@@ -78,7 +78,15 @@ namespace DemoLib.Models
 
         public void UpdateClient(Client client)
         {
-            throw new System.NotImplementedException();
+            var existingClient = allClients_.FirstOrDefault(c => c.ID == client.ID);
+            if (existingClient != null)
+            {
+                existingClient.Name = client.Name;
+                existingClient.Description = client.Description;
+                existingClient.Phone = client.Phone;
+                existingClient.Mail = client.Mail;
+                existingClient.ImagePath = client.ImagePath;
+            }
         }
     }
 }
