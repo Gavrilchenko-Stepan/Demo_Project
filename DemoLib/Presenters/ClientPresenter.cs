@@ -58,6 +58,12 @@ namespace DemoLib.Presenters
             return result;
         }
 
+        public void UpdateClient(Client client)
+        {
+            model_.UpdateClient(client);
+            RefreshClients();
+        }
+
         public void SearchClientsByPartialName(string searchText)
         {
             foreach (IClientView view in views_)
