@@ -27,6 +27,20 @@ namespace DemoLib.Presenters
             }
         }
 
+        public void RefreshClients()
+        {
+            List<Client> allClients = model_.ReadAllClients();
+
+            if (views_.Count > 0)
+            {
+                for (int i = 0; i < allClients.Count && i < views_.Count; ++i)
+                {
+                    Client client = allClients[i];
+                    views_[i].ShowClientInfo(client);
+                }
+            }
+        }
+
         public void SearchClientsByPartialName(string searchText)
         {
             foreach (IClientView view in views_)
