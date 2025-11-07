@@ -89,6 +89,7 @@
             this.AddButton.Size = new System.Drawing.Size(63, 35);
             this.AddButton.Text = "Добавить";
             this.AddButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // RemoveButton
             // 
@@ -98,6 +99,7 @@
             this.RemoveButton.Size = new System.Drawing.Size(55, 35);
             this.RemoveButton.Text = "Удалить";
             this.RemoveButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
             // EditButton
             // 
@@ -107,6 +109,7 @@
             this.EditButton.Size = new System.Drawing.Size(91, 35);
             this.EditButton.Text = "Редактировать";
             this.EditButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // toolStripLabel1
             // 

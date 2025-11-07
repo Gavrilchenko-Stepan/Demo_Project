@@ -1,14 +1,17 @@
-﻿using System;
+﻿using DemoLib;
+using DemoLib.Models.Clients;
+using DemoLib.Presenters;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DemoLib;
-using DemoLib.Models.Clients;
 
 namespace SimpleDemoWin
 {
     public partial class MainForm : Form
     {
+
         private List<Client> allClients_ = new List<Client>();
+        private ClientPresenter presenter_;
         public MainForm()
         {
             InitializeComponent();
@@ -99,6 +102,35 @@ namespace SimpleDemoWin
         private void AlphabetComboBox_TextChanged(object sender, EventArgs e)
         {
             FilterAndSearch();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            using (var form = new AddEditClientForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    presenter_.AddClient(form.Client);
+                    RefreshClientList();
+                }
+            }
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RefreshClientList()
+        {
+            var model = new MySQLClientsModel();
+            allClients_ = model.ReadAllClients();
+            ShowClients(allClients_);
         }
     }
 }
