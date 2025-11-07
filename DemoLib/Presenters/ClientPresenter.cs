@@ -14,7 +14,6 @@ namespace DemoLib.Presenters
         {
             model_ = model;
             views_ = views;
-
             RefreshClients();
         }
 
@@ -22,28 +21,18 @@ namespace DemoLib.Presenters
         {
             List<Client> allClients = model_.ReadAllClients();
 
-            // Обновляем только первое представление (карточку)
             if (views_.Count > 0)
             {
-                if (allClients.Count > 0)
+                for (int i = 0; i < allClients.Count && i < views_.Count; ++i)
                 {
-                    // Показываем первого клиента в карточке
-                    views_[0].ShowClientInfo(allClients[0]);
-                    views_[0].ShowView();
-                }
-                else
-                {
-                    // Скрываем карточку если клиентов нет
-                    views_[0].HideView();
+                    Client client = allClients[i];
+                    views_[i].ShowClientInfo(client);
                 }
             }
         }
 
         public void AddClient(Client client)
         {
-            if (client == null)
-                return;
-
             model_.AddClient(client);
             RefreshClients();
         }
@@ -60,9 +49,6 @@ namespace DemoLib.Presenters
 
         public void UpdateClient(Client client)
         {
-            if (client == null)
-                return;
-
             model_.UpdateClient(client);
             RefreshClients();
         }
