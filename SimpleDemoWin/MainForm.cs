@@ -1,6 +1,7 @@
 ﻿using DemoLib;
 using DemoLib.Models.Clients;
 using DemoLib.Presenters;
+using DemoLib.Views;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -27,6 +28,8 @@ namespace SimpleDemoWin
             MySQLClientsModel model = new MySQLClientsModel();
 
             allClients_ = model.ReadAllClients();
+            var views = new List<IClientView> { Card };
+            presenter_ = new ClientPresenter(model, views);
             ShowClients(allClients_);
 
         }
@@ -106,6 +109,13 @@ namespace SimpleDemoWin
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            if (presenter_ == null)
+            {
+                MessageBox.Show("Презентер не инициализирован", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using (var form = new AddEditClientForm())
             {
                 if (form.ShowDialog() == DialogResult.OK)
