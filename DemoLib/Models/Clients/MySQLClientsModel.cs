@@ -119,7 +119,31 @@ namespace DemoLib.Models.Clients
 
         public bool RemoveClient(int clientId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connStr))
+                {
+                    connection.Open();
+
+                    // Сначала удаляем связанные заказы
+                    string deleteOrdersSql = "DELETE FROM orders WHERE idclient = @id";
+                    MySqlCommand deleteOrdersCommand = new MySqlCommand(deleteOrdersSql, connection);
+                    deleteOrdersCommand.Parameters.AddWithValue("@id", clientId);
+                    deleteOrdersCommand.ExecuteNonQuery();
+
+                    // Затем удаляем клиента
+                    string deleteClientSql = "DELETE FROM clientsinfo WHERE id = @id";
+                    MySqlCommand deleteClientCommand = new MySqlCommand(deleteClientSql, connection);
+                    deleteClientCommand.Parameters.AddWithValue("@id", clientId);
+
+                    int rowsAffected = deleteClientCommand.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void UpdateClient(Client client)
