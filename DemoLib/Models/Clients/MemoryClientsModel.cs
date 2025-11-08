@@ -88,5 +88,35 @@ namespace DemoLib.Models
                 existingClient.ImagePath = client.ImagePath;
             }
         }
+
+        public void AddOrderRecord(int clientId, OrderRecord record)
+        {
+            var client = allClients_.FirstOrDefault(c => c.ID == clientId);
+            if (client != null)
+            {
+                client.order.AddRecord(record);
+            }
+        }
+
+        public bool RemoveOrderRecord(int clientId, OrderRecord record)
+        {
+            var client = allClients_.FirstOrDefault(c => c.ID == clientId);
+            if (client != null)
+            {
+                return client.order.RemoveRecord(record);
+            }
+            return false;
+        }
+
+        public void UpdateOrderRecord(int clientId, OrderRecord oldRecord, OrderRecord newRecord)
+        {
+            var client = allClients_.FirstOrDefault(c => c.ID == clientId);
+            if (client != null)
+            {
+                // Удаляем старую запись и добавляем новую
+                client.order.RemoveRecord(oldRecord);
+                client.order.AddRecord(newRecord);
+            }
+        }
     }
 }

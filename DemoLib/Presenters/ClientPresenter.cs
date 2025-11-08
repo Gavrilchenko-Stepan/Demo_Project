@@ -1,6 +1,7 @@
 ﻿using DemoLib.Models;
 using DemoLib.Views;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace DemoLib.Presenters
 {
@@ -132,5 +133,51 @@ namespace DemoLib.Presenters
         }
         /// Задание на 5+++++++. Сортировка  по числу заказов!!!
 
+        public void AddOrderRecord(int clientId, OrderRecord record)
+        {
+            try
+            {
+                model_.AddOrderRecord(clientId, record);
+                RefreshClients(); // Обновляем данные клиентов
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении заказа: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public bool RemoveOrderRecord(int clientId, OrderRecord record)
+        {
+            try
+            {
+                bool result = model_.RemoveOrderRecord(clientId, record);
+                if (result)
+                {
+                    RefreshClients(); // Обновляем данные клиентов
+                }
+                return result;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении заказа: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public void UpdateOrderRecord(int clientId, OrderRecord oldRecord, OrderRecord newRecord)
+        {
+            try
+            {
+                model_.UpdateOrderRecord(clientId, oldRecord, newRecord);
+                RefreshClients(); // Обновляем данные клиентов
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show($"Ошибка при обновлении заказа: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

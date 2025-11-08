@@ -65,6 +65,7 @@ namespace DemoProject
 
         private bool ValidateForm()
         {
+
             if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
                 MessageBox.Show("Введите наименование товара", "Ошибка",
@@ -78,6 +79,14 @@ namespace DemoProject
                 MessageBox.Show("Цена должна быть больше 0", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 numericUpDownPrice.Focus();
+                return false;
+            }
+
+            if (numericUpDownCount.Value <= 0)
+            {
+                MessageBox.Show("Количество должно быть больше 0", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                numericUpDownCount.Focus();
                 return false;
             }
 

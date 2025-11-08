@@ -66,7 +66,7 @@ namespace DemoProject
             }
             else
             {
-                ClientOrdersForm ordersForm = new ClientOrdersForm();
+                ClientOrdersForm ordersForm = new ClientOrdersForm(obj, presenter_);
                 ordersForm.Text = "Заказы клиента " + obj.Name;
                 ordersForm.SetOrder(obj.order);
                 ordersForm.ShowDialog();

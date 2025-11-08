@@ -20,8 +20,12 @@ namespace ClientCard
 
             foreach (Control control in this.Controls)
             {
-                control.MouseEnter += ClientView_MouseEnter;
-                control.MouseLeave += ClientView_MouseLeave;
+                TitleLabel.Click += (s, e) => SelectedClient?.Invoke(client_);
+                DescriptionLabel.Click += (s, e) => SelectedClient?.Invoke(client_);
+                PhoneLabel.Click += (s, e) => SelectedClient?.Invoke(client_);
+                MailLabel.Click += (s, e) => SelectedClient?.Invoke(client_);
+                AvatarBox.Click += (s, e) => SelectedClient?.Invoke(client_);
+                panel1.Click += (s, e) => SelectedClient?.Invoke(client_);
             }
         }
 
