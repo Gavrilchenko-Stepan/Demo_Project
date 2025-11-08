@@ -58,6 +58,7 @@
             this.AddtoolStripButton.Size = new System.Drawing.Size(32, 32);
             this.AddtoolStripButton.Text = "toolStripButton1";
             this.AddtoolStripButton.ToolTipText = "Позволит добавить новый заказ";
+            this.AddtoolStripButton.Click += new System.EventHandler(this.AddtoolStripButton_Click);
             // 
             // DeletetoolStripButton
             // 
@@ -68,6 +69,7 @@
             this.DeletetoolStripButton.Name = "DeletetoolStripButton";
             this.DeletetoolStripButton.Size = new System.Drawing.Size(32, 32);
             this.DeletetoolStripButton.Text = "toolStripButton2";
+            this.DeletetoolStripButton.Click += new System.EventHandler(this.DeletetoolStripButton_Click);
             // 
             // OrdersTable
             // 

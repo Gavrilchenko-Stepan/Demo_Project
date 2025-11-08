@@ -29,5 +29,15 @@ namespace DemoProject
             OrdersTable.DataSource = null;
             OrdersTable.DataSource = order.GetRecords();
         }
+
+        private void AddtoolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeletetoolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

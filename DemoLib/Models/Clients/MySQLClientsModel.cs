@@ -10,7 +10,7 @@ namespace DemoLib.Models.Clients
 {
     public class MySQLClientsModel : IClientsModel
     {
-        private const string connStr = "server=localhost;user=root;database=clients_db;password=vertrigo;port=3306;";
+        private const string connStr = "server=localhost;user=root;database=clients_db;password=12345678;port=3306;";
 
         public void AddClient(Client client)
         {
@@ -36,6 +36,33 @@ namespace DemoLib.Models.Clients
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public void AddOrderRecord(int clientId, OrderRecord record)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connStr))
+                {
+                    connection.Open();
+
+                    string sql = @"INSERT INTO orders (idclient, article, date, price, count) 
+                                  VALUES (@idclient, @article, @date, @price, @count)";
+
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@idclient", clientId);
+                    command.Parameters.AddWithValue("@article", record.NameProduct);
+                    command.Parameters.AddWithValue("@date", record.SaleDate);
+                    command.Parameters.AddWithValue("@price", record.Price);
+                    command.Parameters.AddWithValue("@count", record.Count);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка при добавлении заказа: {ex.Message}", ex);
             }
         }
 
@@ -146,6 +173,38 @@ namespace DemoLib.Models.Clients
             }
         }
 
+        public bool RemoveOrderRecord(int clientId, OrderRecord record)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connStr))
+                {
+                    connection.Open();
+
+                    string sql = @"DELETE FROM orders 
+                                  WHERE idclient = @idclient 
+                                  AND article = @article 
+                                  AND date = @date 
+                                  AND price = @price 
+                                  AND count = @count";
+
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@idclient", clientId);
+                    command.Parameters.AddWithValue("@article", record.NameProduct);
+                    command.Parameters.AddWithValue("@date", record.SaleDate);
+                    command.Parameters.AddWithValue("@price", record.Price);
+                    command.Parameters.AddWithValue("@count", record.Count);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка при удалении заказа: {ex.Message}", ex);
+            }
+        }
+
         public void UpdateClient(Client client)
         {
             try
@@ -173,6 +232,47 @@ namespace DemoLib.Models.Clients
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public void UpdateOrderRecord(int clientId, OrderRecord oldRecord, OrderRecord newRecord)
+        {
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connStr))
+                {
+                    connection.Open();
+
+                    string sql = @"UPDATE orders 
+                                  SET article = @new_article, date = @new_date, 
+                                      price = @new_price, count = @new_count
+                                  WHERE idclient = @idclient 
+                                  AND article = @old_article 
+                                  AND date = @old_date 
+                                  AND price = @old_price 
+                                  AND count = @old_count";
+
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@idclient", clientId);
+
+                    // Новые значения
+                    command.Parameters.AddWithValue("@new_article", newRecord.NameProduct);
+                    command.Parameters.AddWithValue("@new_date", newRecord.SaleDate);
+                    command.Parameters.AddWithValue("@new_price", newRecord.Price);
+                    command.Parameters.AddWithValue("@new_count", newRecord.Count);
+
+                    // Старые значения для идентификации записи
+                    command.Parameters.AddWithValue("@old_article", oldRecord.NameProduct);
+                    command.Parameters.AddWithValue("@old_date", oldRecord.SaleDate);
+                    command.Parameters.AddWithValue("@old_price", oldRecord.Price);
+                    command.Parameters.AddWithValue("@old_count", oldRecord.Count);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка при обновлении заказа: {ex.Message}", ex);
             }
         }
     }
